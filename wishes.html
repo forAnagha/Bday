@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Birthday Wishes 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --pink:#FF6FAE;--peach:#FFB3C6;--yellow:#FFE66D;
+    --purple:#C084FC;--mint:#6EE7B7;--dark:#2D1B36;--cream:#FFF5F9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{min-height:100%;overflow-x:hidden;}
+  body{
+    background:var(--cream); font-family:'Nunito',sans-serif; color:var(--dark);
+    background-image: radial-gradient(circle at 10% 20%, #ffe0f0 0%,transparent 40%),
+                      radial-gradient(circle at 90% 80%, #e8d5ff 0%,transparent 40%);
+  }
+
+  /* ── CONFETTI ── */
+  .confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+  .dot{position:absolute;top:-20px;border-radius:50%;animation:fall linear infinite;opacity:0.7;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,245,249,0.85);backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--peach);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 2rem;flex-wrap:wrap;gap:0.8rem;
+  }
+  .nav-logo{font-family:'Pacifico',cursive;font-size:1.4rem;color:var(--pink);}
+  .nav-links{display:flex;gap:0.8rem;flex-wrap:wrap;}
+  .nav-link{
+    padding:0.5rem 1.2rem;border-radius:99px;text-decoration:none;font-weight:700;
+    font-size:0.9rem;transition:transform 0.2s,box-shadow 0.2s;
+  }
+  .nav-link:hover{transform:translateY(-3px);}
+  .nav-link.active{background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;
+    box-shadow:0 4px 16px rgba(255,111,174,0.4);}
+  .nav-link:not(.active){background:#fff;color:var(--pink);border:2px solid var(--peach);}
+
+  /* ── HERO ── */
+  .hero{
+    text-align:center;padding:5rem 2rem 3rem;position:relative;z-index:1;
+  }
+  .page-tag{
+    background:linear-gradient(135deg,var(--yellow),var(--pink));
+    color:#fff;font-weight:800;font-size:0.8rem;letter-spacing:3px;
+    padding:0.4rem 1.2rem;border-radius:99px;text-transform:uppercase;
+    display:inline-block;margin-bottom:1.2rem;
+    animation:floatTag 3s ease-in-out infinite;
+  }
+  @keyframes floatTag{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  h1.page-title{
+    font-family:'Pacifico',cursive;
+    font-size:clamp(2.2rem,7vw,5rem);
+    background:linear-gradient(135deg,#FF6FAE,#C084FC);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    animation:pop 0.8s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes pop{from{transform:scale(0.6);opacity:0}to{transform:scale(1);opacity:1}}
+  .hero-sub{
+    font-size:1.1rem;color:#7c3aed;font-weight:700;margin-top:1rem;
+    max-width:550px;margin-inline:auto;line-height:1.7;
+  }
+
+  /* ── WISHES GRID ── */
+  .wishes-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.8rem;max-width:1000px;margin:0 auto;padding:2rem;
+    position:relative;z-index:1;
+  }
+  .wish-card{
+    background:#fff;border-radius:28px;padding:2rem 1.8rem;
+    box-shadow:0 8px 30px rgba(255,111,174,0.1);
+    transition:transform 0.3s,box-shadow 0.3s;
+    position:relative;overflow:hidden;
+    opacity:0;animation:slideUp 0.6s ease forwards;
+  }
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .wish-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 40px rgba(255,111,174,0.25);}
+  .wish-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(135deg,var(--pink),var(--purple));
+  }
+  .wish-icon{font-size:2.5rem;margin-bottom:0.8rem;}
+  .wish-title{font-family:'Pacifico',cursive;font-size:1.2rem;color:var(--pink);margin-bottom:0.6rem;}
+  .wish-text{color:#6b7280;line-height:1.7;font-size:0.95rem;}
+
+  /* ── BIG MESSAGE ── */
+  .message-section{
+    max-width:700px;margin:1rem auto 3rem;padding:0 2rem;
+    position:relative;z-index:1;
+  }
+  .message-box{
+    background:linear-gradient(135deg,#fff0f9,#f3e8ff);
+    border-radius:32px;padding:2.5rem 2rem;text-align:center;
+    border:3px solid var(--peach);
+    box-shadow:0 12px 40px rgba(255,111,174,0.15);
+  }
+  .message-box p{
+    font-family:'Dancing Script',cursive;font-size:clamp(1.3rem,4vw,2rem);
+    color:var(--purple);line-height:1.8;
+  }
+  .message-sign{
+    margin-top:1rem;font-size:1.1rem;color:var(--pink);font-weight:800;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-group{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;padding:1rem 2rem 3rem;position:relative;z-index:1;}
+  .btn{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    padding:1rem 2rem;border-radius:99px;
+    font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;
+    text-decoration:none;cursor:pointer;border:none;
+    transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;
+  }
+  .btn:hover{transform:translateY(-4px) scale(1.04);}
+  .btn-primary{background:linear-gradient(135deg,#FF6FAE,#C084FC);color:#fff;box-shadow:0 8px 24px rgba(255,111,174,0.5);}
+  .btn-secondary{background:linear-gradient(135deg,#FFE66D,#FF6FAE);color:#fff;box-shadow:0 8px 24px rgba(255,230,109,0.4);}
+
+  /* ── MUSIC ── */
+  #musicBtn{
+    position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;
+    background:linear-gradient(135deg,var(--pink),var(--purple));
+    color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:1.6rem;
+    cursor:pointer;box-shadow:0 6px 20px rgba(255,111,174,0.5);
+    transition:transform 0.2s;display:flex;align-items:center;justify-content:center;
+  }
+  #musicBtn:hover{transform:scale(1.15) rotate(10deg);}
+
+  @media(max-width:600px){
+    .btn-group{flex-direction:column;align-items:center;}
+    .btn{width:85%;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="confetti-wrap" id="confettiWrap"></div>
+
+<audio id="bgm" loop></audio>
+<button id="musicBtn" title="Toggle Music">🎵</button>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">🎂 BirthVerse</span>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 Home</a>
+    <a href="wishes.html" class="nav-link active">🎉 Wishes</a>
+    <a href="reasons.html" class="nav-link">👑 Reasons</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="page-tag">🎉 Birthday Wishes 🎉</div>
+  <h1 class="page-title">All the Best Wishes,<br/>Just for You 🌸</h1>
+  <p class="hero-sub">You deserve ALL of this and then some. Here's a whole page dedicated to celebrating the chaos and brilliance that is you.</p>
+</section>
+
+<!-- WISHES GRID -->
+<div class="wishes-grid">
+
+  <div class="wish-card" style="animation-delay:0.1s">
+    <div class="wish-icon">🌟</div>
+    <div class="wish-title">Shine Brighter</div>
+    <div class="wish-text">May this birthday mark the start of the most ridiculously glowing era of your life. You've already set the bar high — now go higher.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.2s">
+    <div class="wish-icon">🎯</div>
+    <div class="wish-title">Get Everything You Want</div>
+    <div class="wish-text">May every goal you've been eyeing finally fall into your lap this year. If it doesn't come to you — you're the type to go get it anyway.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.3s">
+    <div class="wish-icon">🧁</div>
+    <div class="wish-title">Birthday Calories Don't Count</div>
+    <div class="wish-text">It's your birthday. Eat the whole cake. Eat two cakes. Nobody's counting — and if they are, they're wrong.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.4s">
+    <div class="wish-icon">🎊</div>
+    <div class="wish-title">A Year of Wins</div>
+    <div class="wish-text">May this year be so full of wins, plot twists (the good kind), and unforgettable moments that you need a second journal to keep up.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.5s">
+    <div class="wish-icon">🚀</div>
+    <div class="wish-title">Level Up Season</div>
+    <div class="wish-text">This is officially your "levelling up" era. Watch it happen. Everyone else is just an audience at this point.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.6s">
+    <div class="wish-icon">👑</div>
+    <div class="wish-title">Stay Iconic</div>
+    <div class="wish-text">Don't change a single thing. Be exactly as chaotic, brilliant, hilarious, and unbothered as you've always been. It's working.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.7s">
+    <div class="wish-icon">🌈</div>
+    <div class="wish-title">Colour Every Room</div>
+    <div class="wish-text">May every space you walk into this year feel the difference. You bring a kind of energy that doesn't go unnoticed — and that's a superpower.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.8s">
+    <div class="wish-icon">🎁</div>
+    <div class="wish-title">You Deserve It All</div>
+    <div class="wish-text">Rest. Celebration. Good surprises. Ridiculously fun memories. All of it is yours this year. You've earned a genuinely spectacular one.</div>
+  </div>
+
+  <div class="wish-card" style="animation-delay:0.9s">
+    <div class="wish-icon">😂</div>
+    <div class="wish-title">Keep Being Hilarious</div>
+    <div class="wish-text">Your sense of humour is genuinely top-tier. May this year bring you moments so funny you almost can't survive them.</div>
+  </div>
+
+</div>
+
+<!-- BIG MESSAGE -->
+<div class="message-section">
+  <div class="message-box">
+    <p>"Happy Birthday to the person who somehow manages to be the most unexpected, most real, and most entertaining human I know. Today is 100% yours — own it."</p>
+    <div class="message-sign">— made just for you 🎂✨</div>
+  </div>
+</div>
+
+<!-- NAV BUTTONS -->
+<div class="btn-group">
+  <a href="index.html" class="btn btn-secondary">🏠 Back to Home</a>
+  <a href="reasons.html" class="btn btn-primary">👑 50 Reasons You're Legendary →</a>
+</div>
+
+<script>
+// confetti
+const colors=['#FF6FAE','#FFB3C6','#FFE66D','#C084FC','#6EE7B7','#fff'];
+const wrap=document.getElementById('confettiWrap');
+for(let i=0;i<50;i++){
+  const d=document.createElement('div');d.className='dot';
+  const s=Math.random()*10+5;
+  d.style.cssText=`width:${s}px;height:${s}px;background:${colors[Math.floor(Math.random()*colors.length)]};
+    left:${Math.random()*100}%;animation-duration:${Math.random()*6+4}s;animation-delay:${Math.random()*5}s;
+    border-radius:${Math.random()>0.5?'50%':'4px'};`;
+  wrap.appendChild(d);
+}
+// music
+const bgm=document.getElementById('bgm');
+const btn=document.getElementById('musicBtn');
+bgm.src='https://upload.wikimedia.org/wikipedia/commons/transcoded/2/22/Happy_Birthday_original_version.ogg/Happy_Birthday_original_version.ogg.mp3';
+let playing=false;
+btn.addEventListener('click',()=>{
+  if(playing){bgm.pause();btn.textContent='🎵';}
+  else{bgm.play().catch(()=>{});btn.textContent='🔊';}
+  playing=!playing;
+});
+</script>
+</body>
+</html>
